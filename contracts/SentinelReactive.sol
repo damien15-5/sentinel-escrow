@@ -11,21 +11,25 @@ contract SentinelReactive is IReactive, FeePayer {
     address public immutable owner;
     uint256 public immutable originChain;
     uint16 public immutable threshold;
+    /// Stricter threshold for escrows whose deposit is at least highValueWei (size-aware policy).
+    uint16 public immutable highValueThreshold;
+    uint256 public immutable highValueWei;
     bytes32 public immutable modelHash;
     address public vault;
     address public gateway;
-    struct Request { bytes32 hash; uint64 deadline; uint64 lastRetry; bool decided; uint16 score; bytes32 reportHash; }
+    struct Request { bytes32 hash; uint64 deadline; uint64 lastRetry; bool decided; uint16 score; bytes32 reportHash; uint16 threshold; }
     mapping(uint256 => Request) public requests;
     event AssessmentRouted(uint256 indexed id, bytes32 originTxHash, bytes32 contentHash);
-    event DecisionRouted(uint256 indexed id, bytes32 reportTxHash, uint16 score, bool frozen, bytes32 reportHash);
+    event DecisionRouted(uint256 indexed id, bytes32 reportTxHash, uint16 score, bool frozen, bytes32 reportHash, uint16 thresholdApplied);
     event DeliveryRetried(uint256 indexed id, bool decision);
     event Configured(address vault, address gateway);
     error InvalidConfig();
     error InvalidEvent();
     error RetryUnavailable();
-    constructor(uint256 originChain_, uint16 threshold_, bytes32 modelHash_) payable FeePayer(SYSTEM) {
-        require(originChain_ != 0 && threshold_ > 0 && threshold_ <= 10000 && modelHash_ != bytes32(0), "invalid policy");
+    constructor(uint256 originChain_, uint16 threshold_, uint16 highValueThreshold_, uint256 highValueWei_, bytes32 modelHash_) payable FeePayer(SYSTEM) {
+        require(originChain_ != 0 && threshold_ > 0 && threshold_ <= 10000 && highValueThreshold_ > 0 && highValueThreshold_ <= threshold_ && modelHash_ != bytes32(0), "invalid policy");
         owner = msg.sender; originChain = originChain_; threshold = threshold_; modelHash = modelHash_;
+        highValueThreshold = highValueThreshold_; highValueWei = highValueWei_;
     }
     modifier onlyOwner() { if (msg.sender != owner) revert Unauthorized(); _; }
     /// @dev One-time wiring; subscriptions are exact chain + contract + topic matches.
@@ -42,10 +46,12 @@ contract SentinelReactive is IReactive, FeePayer {
         bytes32 hash = bytes32(log_.topic2);
         if (log_.contractAddress == vault && log_.topic0 == OPEN_TOPIC) {
             if (requests[id].hash != bytes32(0)) return;
-            (,,,uint64 deadline,) = abi.decode(log_.data, (address,address,uint256,uint64,string));
+            (,,uint256 amount,uint64 deadline,) = abi.decode(log_.data, (address,address,uint256,uint64,string));
             if (hash == bytes32(0) || id == 0) revert InvalidEvent();
             if (block.timestamp >= deadline) return;
-            requests[id] = Request(hash, deadline, uint64(block.timestamp), false, 0, bytes32(0));
+            // Policy is fixed when the deposit is observed, so a later retry can never change it.
+            uint16 applied = amount >= highValueWei ? highValueThreshold : threshold;
+            requests[id] = Request(hash, deadline, uint64(block.timestamp), false, 0, bytes32(0), applied);
             _request(id);
             emit AssessmentRouted(id, bytes32(log_.txHash), hash);
         } else if (log_.contractAddress == gateway && log_.topic0 == REPORT_TOPIC) {
@@ -55,7 +61,7 @@ contract SentinelReactive is IReactive, FeePayer {
             if (request.decided || block.timestamp >= request.deadline) return;
             request.decided = true; request.score = score; request.reportHash = reportHash;
             _decide(id);
-            emit DecisionRouted(id, bytes32(log_.txHash), score, score >= threshold, reportHash);
+            emit DecisionRouted(id, bytes32(log_.txHash), score, score >= request.threshold, reportHash, request.threshold);
         } else revert InvalidEvent();
     }
     /// @notice Retries only the existing, immutable request/result; cannot override a score.
@@ -72,7 +78,7 @@ contract SentinelReactive is IReactive, FeePayer {
     }
     function _decide(uint256 id) private {
         Request storage request = requests[id];
-        _callback(abi.encodeWithSignature("deliverDecision(address,uint256,bytes32,uint16,bool,bytes32)", address(0), id, request.hash, request.score, request.score >= threshold, request.reportHash));
+        _callback(abi.encodeWithSignature("deliverDecision(address,uint256,bytes32,uint16,bool,bytes32)", address(0), id, request.hash, request.score, request.score >= request.threshold, request.reportHash));
     }
     function _callback(bytes memory payload) private {
         IOmni(SYSTEM).requestCallbackV_1_0(IOmni.CallbackConfiguration_V_1_0(originChain, gateway, 600000, payload));

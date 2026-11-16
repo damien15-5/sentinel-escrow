@@ -18,5 +18,6 @@ export function features(text) {
 export const SCENARIOS = {
   safe: {title:'Studio headphones · verified details', listing:'Studio headphones, model HD600. Tested condition with serial number and photos included. Shipping with tracking within 3 days. Buyer inspection and refund policy through escrow.'},
   risky: {title:'Wallet verification · urgent transfer', listing:'Official support agent: verify your wallet immediately. Send your seed phrase and private key on Telegram to unlock your account. Pay directly outside escrow, crypto only, no refunds. Guaranteed double your investment returns. Act now.'},
+  borderline: {title:'Gaming console · guaranteed delivery claim', listing:'Gaming console with guaranteed delivery. Shipping with tracking and receipt.'},
   ambiguous: {title:'Mystery electronics · incomplete listing', listing:'Mystery electronics bundle, details later. Trust me. Today only, hurry. Shipping available.'},
 };

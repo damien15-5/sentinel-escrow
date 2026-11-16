@@ -12,7 +12,7 @@ export async function localFixture() {
   await omniRaw.request({method:'evm_setAccountCode',params:[SYSTEM,artifact('MockOmni').deployedBytecode]});
   const system=new Contract(SYSTEM,artifact('MockOmni').abi,omniOwner);
   const proxy=await deploy('MockCallbackProxy',owner);
-  const reactive=await deploy('SentinelReactive',omniOwner,[31337,6500,MODEL_HASH],parseEther('1'));
+  const reactive=await deploy('SentinelReactive',omniOwner,[31337,6500,5000,parseEther(process.env.LOCAL_HIGH_VALUE_ETH||'1'),MODEL_HASH],parseEther('1'));
   const vault=await deploy('EscrowVault',owner);
   const gateway=await deploy('AssessmentGateway',owner,[proxy.target,reactive.target,await reporter.getAddress(),vault.target,MODEL_HASH],parseEther('.1'));
   await (await vault.configureGateway(gateway.target)).wait();
@@ -21,8 +21,8 @@ export async function localFixture() {
   f.close=async()=>{base.destroy();omni.destroy();await baseRaw.disconnect();await omniRaw.disconnect();};
   return f;
 }
-export async function openLocal(f,listing,duration=3600){
-  const receipt=await(await f.vault.connect(f.buyer).open(await f.seller.getAddress(),duration,listing,{value:parseEther('.01')})).wait();
+export async function openLocal(f,listing,duration=3600,amountEth='.01'){
+  const receipt=await(await f.vault.connect(f.buyer).open(await f.seller.getAddress(),duration,listing,{value:parseEther(amountEth)})).wait();
   return {receipt,id:event(receipt,f.vault,'EscrowOpened').parsed.args.id};
 }
 export async function relay(f,receipt,source,eventName){
@@ -32,10 +32,10 @@ export async function relay(f,receipt,source,eventName){
   const callbackReceipt=await(await f.proxy.deliver(callback.reactive,callback.recipient,callback.payload,{gasLimit:callback.gasLimit})).wait();
   return {reactiveReceipt,callbackReceipt};
 }
-export async function localLoop(f,listing,onStep=()=>{}){
+export async function localLoop(f,listing,onStep=()=>{},amountEth='.01'){
   const started=Date.now(); const steps=[];
   async function step(name,chain,receipt,detail){const item={name,chain,txHash:receipt.hash,blockNumber:receipt.blockNumber,gasUsed:String(receipt.gasUsed),observedAt:new Date().toISOString(),detail};steps.push(item);await onStep(item);}
-  const {receipt:opened,id}=await openLocal(f,listing);
+  const {receipt:opened,id}=await openLocal(f,listing,3600,amountEth);
   await step('Escrow opened','local-origin',opened,'Buyer deposit locked; listing committed on-chain');
   const request=await relay(f,opened,f.vault,'EscrowOpened');
   await step('Assessment routed','local-reactive',request.reactiveReceipt,'Reactive validates origin and requests a callback');
@@ -44,8 +44,9 @@ export async function localLoop(f,listing,onStep=()=>{}){
   const reported=await(await f.gateway.connect(f.reporter).reportRisk(id,report.score,report.reportHash)).wait();
   await step('Live AI report committed','local-origin',reported,`Neural model scored ${report.score}/10000`);
   const decision=await relay(f,reported,f.gateway,'RiskReported');
-  await step('Decision routed','local-reactive',decision.reactiveReceipt,'Reactive applies the immutable 6500 risk threshold');
+  const applied=Number(event(decision.reactiveReceipt,f.reactive,'DecisionRouted').parsed.args.thresholdApplied);
+  await step('Decision routed','local-reactive',decision.reactiveReceipt,`Reactive applies the size-aware ${applied} risk threshold`);
   await step('Escrow updated','local-origin',decision.callbackReceipt,'Authenticated callback enforces the decision');
   const item=await f.vault.escrows(id);
-  return {schemaVersion:1,mode:'local-simulation',networkDisclaimer:'Two local EVM chains with mock Omni transport. These are real local receipts, not Lasna/Base Sepolia transactions or latency measurements.',id:String(id),listing,threshold:6500,status:Number(item.state)===3?'Frozen':'Cleared',amountEth:'.01',report,steps,elapsedMs:Date.now()-started,contracts:{vault:f.vault.target,gateway:f.gateway.target,reactive:f.reactive.target,proxy:f.proxy.target},chainIds:{origin:31337,reactive:31338}};
+  return {schemaVersion:1,mode:'local-simulation',networkDisclaimer:'Two local EVM chains with mock Omni transport. These are real local receipts, not Lasna/Base Sepolia transactions or latency measurements.',id:String(id),listing,threshold:applied,status:Number(item.state)===3?'Frozen':'Cleared',amountEth,report,steps,elapsedMs:Date.now()-started,contracts:{vault:f.vault.target,gateway:f.gateway.target,reactive:f.reactive.target,proxy:f.proxy.target},chainIds:{origin:31337,reactive:31338}};
 }

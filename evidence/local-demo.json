@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T17:27:39.590Z",
+  "generatedAt": "2026-11-16T18:17:17.099Z",
   "mode": "local-simulation",
   "runs": [
     {
@@ -17,7 +17,7 @@
         "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
         "context": {
           "chainId": 31337,
-          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
           "escrowId": "1"
         },
         "contentHash": "0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143",
@@ -34,74 +34,74 @@
           "delivery_terms": 1,
           "specific_description": 1
         },
-        "assessedAt": "2026-11-16T17:27:38.711Z",
-        "inferenceMs": 1.222,
+        "assessedAt": "2026-11-16T18:17:16.734Z",
+        "inferenceMs": 0.416,
         "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
-        "reportHash": "0xf45ffb596ee8860bc994e93b371961f560eaa977ce35d6754d8953b92a51e88f",
-        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"1\"},\"contentHash\":\"0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143\",\"score\":0,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":0,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":1,\"specific_description\":1},\"assessedAt\":\"2026-11-16T17:27:38.711Z\",\"inferenceMs\":1.222,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+        "reportHash": "0xba08e956d6f417c0cebd519adf03138379fb7af4d8a7959a58dd1a5d083aeede",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x082036A80eee8b5217288b15aEC14704a60A844C\",\"escrowId\":\"1\"},\"contentHash\":\"0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143\",\"score\":0,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":0,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":1,\"specific_description\":1},\"assessedAt\":\"2026-11-16T18:17:16.734Z\",\"inferenceMs\":0.416,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
       },
       "steps": [
         {
           "name": "Escrow opened",
           "chain": "local-origin",
-          "txHash": "0x157ee948c9923cdb971d1e9b724ca1f5c51379579c6aedcf519096e9184882c3",
+          "txHash": "0x078f722a7ea1c8c73ed2b0fec0daa75c15846b1a588c90527ec480ccaaaacc8c",
           "blockNumber": 5,
           "gasUsed": "174164",
-          "observedAt": "2026-11-16T17:27:38.570Z",
+          "observedAt": "2026-11-16T18:17:16.666Z",
           "detail": "Buyer deposit locked; listing committed on-chain"
         },
         {
           "name": "Assessment routed",
           "chain": "local-reactive",
-          "txHash": "0x25deb5fe9943278ce4bce1747775df23c059b95a658d5cd4652935e1a81b9ef0",
+          "txHash": "0x4fcbb59a90512709f345f15b40746485d6ffbaa765d0693814a4bf1eea1e4be7",
           "blockNumber": 4,
           "gasUsed": "95581",
-          "observedAt": "2026-11-16T17:27:38.709Z",
+          "observedAt": "2026-11-16T18:17:16.734Z",
           "detail": "Reactive validates origin and requests a callback"
         },
         {
           "name": "AI job requested",
           "chain": "local-origin",
-          "txHash": "0xf90a666dfc5655c2e8d3b9a8b87b58b42b5e1a252f6f0e1bed9ba71a2271a506",
+          "txHash": "0xa09baaf33a98e2cc803cecec7f10cd47c54e5a93b8d4c5b58da763c594b5bcb2",
           "blockNumber": 6,
           "gasUsed": "93507",
-          "observedAt": "2026-11-16T17:27:38.709Z",
+          "observedAt": "2026-11-16T18:17:16.734Z",
           "detail": "Authenticated callback creates the inference job"
         },
         {
           "name": "Live AI report committed",
           "chain": "local-origin",
-          "txHash": "0x4f6058b6afb69f3aa7529a0e491a43e0e51bb2c26c39acc7a3b8f062bb197b27",
+          "txHash": "0x61aeb100fb05198ac369291e6e181a01bec0d90e9225828bc3bac446072ed157",
           "blockNumber": 7,
           "gasUsed": "54519",
-          "observedAt": "2026-11-16T17:27:38.751Z",
+          "observedAt": "2026-11-16T18:17:16.755Z",
           "detail": "Neural model scored 0/10000"
         },
         {
           "name": "Decision routed",
           "chain": "local-reactive",
-          "txHash": "0x6494e674647d2743ce1b62d347580d9a3e1d6f0162a68729038f15f0d899e1c6",
+          "txHash": "0xf0196b3de03e1f65e804162c5abfc4bcfb02263e0f20076b0570e0d0ce0dc789",
           "blockNumber": 5,
-          "gasUsed": "76599",
-          "observedAt": "2026-11-16T17:27:38.856Z",
+          "gasUsed": "76575",
+          "observedAt": "2026-11-16T18:17:16.800Z",
           "detail": "Reactive applies the immutable 6500 risk threshold"
         },
         {
           "name": "Escrow updated",
           "chain": "local-origin",
-          "txHash": "0x66c9e19f13e8346fb5784303ea07d2169b9113f33faaa89a3407eaa4c5666710",
+          "txHash": "0x45e7a13a0cdc4876c353fa57341616747193a55263141ae2531e7b9ba25a697e",
           "blockNumber": 8,
           "gasUsed": "74764",
-          "observedAt": "2026-11-16T17:27:38.857Z",
+          "observedAt": "2026-11-16T18:17:16.800Z",
           "detail": "Authenticated callback enforces the decision"
         }
       ],
-      "elapsedMs": 437,
+      "elapsedMs": 179,
       "contracts": {
-        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
-        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
-        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
-        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+        "vault": "0xb80E0C48E1Ec47AaF39Ce78fd2610f4c315673F9",
+        "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
+        "reactive": "0x95515559b0033CD0cf9214380fB6dd7ab219Fc8f",
+        "proxy": "0x951D440aB5649Faf24bf14b033A8b211F4f6cdEC"
       },
       "chainIds": {
         "origin": 31337,
@@ -125,7 +125,7 @@
         "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
         "context": {
           "chainId": 31337,
-          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
           "escrowId": "2"
         },
         "contentHash": "0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec",
@@ -142,74 +142,74 @@
           "delivery_terms": 0,
           "specific_description": 0
         },
-        "assessedAt": "2026-11-16T17:27:39.036Z",
-        "inferenceMs": 0.101,
+        "assessedAt": "2026-11-16T18:17:16.880Z",
+        "inferenceMs": 0.068,
         "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
-        "reportHash": "0x0d986b4333269d65a87c967b76d6abc40dd986d05c280883baff78f580ce8119",
-        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"2\"},\"contentHash\":\"0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec\",\"score\":10000,\"features\":{\"credential_request\":1,\"off_platform_payment\":1,\"guaranteed_returns\":1,\"urgency\":1,\"irreversible_payment\":1,\"impersonation\":1,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":0,\"specific_description\":0},\"assessedAt\":\"2026-11-16T17:27:39.036Z\",\"inferenceMs\":0.101,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+        "reportHash": "0xe388b88a19e5712f566f14a2fa615fdd994b546e1ee78968dcccba1b88488eeb",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x082036A80eee8b5217288b15aEC14704a60A844C\",\"escrowId\":\"2\"},\"contentHash\":\"0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec\",\"score\":10000,\"features\":{\"credential_request\":1,\"off_platform_payment\":1,\"guaranteed_returns\":1,\"urgency\":1,\"irreversible_payment\":1,\"impersonation\":1,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":0,\"specific_description\":0},\"assessedAt\":\"2026-11-16T18:17:16.880Z\",\"inferenceMs\":0.068,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
       },
       "steps": [
         {
           "name": "Escrow opened",
           "chain": "local-origin",
-          "txHash": "0xe8b65507b608503e10f58ced2d06c55824de2bb16519e97bb5c330c0319dfb32",
+          "txHash": "0x9b122e07066330745a774767f29b282c3783c5911bb9879be3b6af264c251f88",
           "blockNumber": 9,
           "gasUsed": "158558",
-          "observedAt": "2026-11-16T17:27:38.932Z",
+          "observedAt": "2026-11-16T18:17:16.832Z",
           "detail": "Buyer deposit locked; listing committed on-chain"
         },
         {
           "name": "Assessment routed",
           "chain": "local-reactive",
-          "txHash": "0x9fcaa507679b2f4f1ab410ca43d259b5e3dec2375501a0a24b9cb4bf8121a23b",
+          "txHash": "0x4de50cfd3d2abc0dfa61b90fa28651344e299f19ef0a2ccc9d1c74ae02242ce6",
           "blockNumber": 6,
           "gasUsed": "96558",
-          "observedAt": "2026-11-16T17:27:39.035Z",
+          "observedAt": "2026-11-16T18:17:16.880Z",
           "detail": "Reactive validates origin and requests a callback"
         },
         {
           "name": "AI job requested",
           "chain": "local-origin",
-          "txHash": "0x27fcbf82e8038b76dcce6c011a99604bcf3a8429b710d3219d1e00f73e5701c7",
+          "txHash": "0xdeb16a3fb05929e3ae9dca7782341684ae951454777cd9411c11f372c96511e2",
           "blockNumber": 10,
           "gasUsed": "93507",
-          "observedAt": "2026-11-16T17:27:39.035Z",
+          "observedAt": "2026-11-16T18:17:16.880Z",
           "detail": "Authenticated callback creates the inference job"
         },
         {
           "name": "Live AI report committed",
           "chain": "local-origin",
-          "txHash": "0x6997407bf428bdb4dbd3593dbbec7dc06e9f10f5a4115abe2c1d31b21f38921d",
+          "txHash": "0x79ad948dc0384117270ae64fb4bae8516c375971b39a7e784f35c115105e0ff2",
           "blockNumber": 11,
           "gasUsed": "54543",
-          "observedAt": "2026-11-16T17:27:39.078Z",
+          "observedAt": "2026-11-16T18:17:16.897Z",
           "detail": "Neural model scored 10000/10000"
         },
         {
           "name": "Decision routed",
           "chain": "local-reactive",
-          "txHash": "0x33b65a14203167126723c237962917d3eae084878139a63bccdbc51378c2dbf0",
+          "txHash": "0x28b1c62b75be4fbc3221b3ab800909a6ea9f003ebb3c38c4ddf3786cd780f4f7",
           "blockNumber": 7,
           "gasUsed": "76623",
-          "observedAt": "2026-11-16T17:27:39.180Z",
+          "observedAt": "2026-11-16T18:17:16.943Z",
           "detail": "Reactive applies the immutable 6500 risk threshold"
         },
         {
           "name": "Escrow updated",
           "chain": "local-origin",
-          "txHash": "0xf6f43c4808265ffeeb1ef100c299724a9bf224402b665d17c6b155ef025f48ee",
+          "txHash": "0x8e66cfe47b98eb1b6d30710cd5f712c9ff1a134eca2635598ac864b41a3c8f6f",
           "blockNumber": 12,
           "gasUsed": "74790",
-          "observedAt": "2026-11-16T17:27:39.180Z",
+          "observedAt": "2026-11-16T18:17:16.943Z",
           "detail": "Authenticated callback enforces the decision"
         }
       ],
-      "elapsedMs": 325,
+      "elapsedMs": 142,
       "contracts": {
-        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
-        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
-        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
-        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+        "vault": "0xb80E0C48E1Ec47AaF39Ce78fd2610f4c315673F9",
+        "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
+        "reactive": "0x95515559b0033CD0cf9214380fB6dd7ab219Fc8f",
+        "proxy": "0x951D440aB5649Faf24bf14b033A8b211F4f6cdEC"
       },
       "chainIds": {
         "origin": 31337,
@@ -233,7 +233,7 @@
         "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
         "context": {
           "chainId": 31337,
-          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
           "escrowId": "3"
         },
         "contentHash": "0x6473a0ad4357f9536ede9351cf1b10d80a826b4c024845fe415159680a0c35ea",
@@ -250,74 +250,74 @@
           "delivery_terms": 0.5,
           "specific_description": 0
         },
-        "assessedAt": "2026-11-16T17:27:39.417Z",
-        "inferenceMs": 0.166,
+        "assessedAt": "2026-11-16T18:17:17.031Z",
+        "inferenceMs": 0.059,
         "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
-        "reportHash": "0x3d7a50536bc4d96ce136760a3cf7cdce0229e4b226fcfe37e6819d8eb2544f91",
-        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"3\"},\"contentHash\":\"0x6473a0ad4357f9536ede9351cf1b10d80a826b4c024845fe415159680a0c35ea\",\"score\":9994,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":1,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":1,\"buyer_protection\":0,\"delivery_terms\":0.5,\"specific_description\":0},\"assessedAt\":\"2026-11-16T17:27:39.417Z\",\"inferenceMs\":0.166,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+        "reportHash": "0x106fa3c5563773da4db4f9aa8ed2091d61a27669e7fba6b1e526484958c81ff6",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x082036A80eee8b5217288b15aEC14704a60A844C\",\"escrowId\":\"3\"},\"contentHash\":\"0x6473a0ad4357f9536ede9351cf1b10d80a826b4c024845fe415159680a0c35ea\",\"score\":9994,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":1,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":1,\"buyer_protection\":0,\"delivery_terms\":0.5,\"specific_description\":0},\"assessedAt\":\"2026-11-16T18:17:17.031Z\",\"inferenceMs\":0.059,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
       },
       "steps": [
         {
           "name": "Escrow opened",
           "chain": "local-origin",
-          "txHash": "0x77314102762cd3feb3fe1b00818c325da8aeb2632bb9ad0e9095284e0de2c3d4",
+          "txHash": "0x195e8b5578bd1853cdc008dc949a79a7f9a8bd3f6538102c30e1603ce1e24e3e",
           "blockNumber": 13,
           "gasUsed": "154834",
-          "observedAt": "2026-11-16T17:27:39.290Z",
+          "observedAt": "2026-11-16T18:17:16.981Z",
           "detail": "Buyer deposit locked; listing committed on-chain"
         },
         {
           "name": "Assessment routed",
           "chain": "local-reactive",
-          "txHash": "0x56986dea901db3b4d2f05eb50309c32f1a8f0355afbb7d32975ae534d66ab873",
+          "txHash": "0x260ce9046879a72cc6c7089d172bc1b9888ac7c0e26426e021ec2c91bd2cec55",
           "blockNumber": 8,
           "gasUsed": "94116",
-          "observedAt": "2026-11-16T17:27:39.417Z",
+          "observedAt": "2026-11-16T18:17:17.031Z",
           "detail": "Reactive validates origin and requests a callback"
         },
         {
           "name": "AI job requested",
           "chain": "local-origin",
-          "txHash": "0x040b8dedc4bdbb0287a1065b3ccdb428f8d9a4aa4d32b25cca77210b4e004214",
+          "txHash": "0x0f7298dcaa0beb80b3752741d9c8c18a5e61e03bbba0c93586e73d6eceb707ce",
           "blockNumber": 14,
           "gasUsed": "93507",
-          "observedAt": "2026-11-16T17:27:39.417Z",
+          "observedAt": "2026-11-16T18:17:17.031Z",
           "detail": "Authenticated callback creates the inference job"
         },
         {
           "name": "Live AI report committed",
           "chain": "local-origin",
-          "txHash": "0x561f0a397f35f3bee22132a8de42ec66037bfc529abd96873a3c84e72a8ffbe9",
+          "txHash": "0x780f27d4b291b09a732dabeece942a3211541576ccff4cb9ac4c517705d4bc0f",
           "blockNumber": 15,
           "gasUsed": "54543",
-          "observedAt": "2026-11-16T17:27:39.451Z",
+          "observedAt": "2026-11-16T18:17:17.047Z",
           "detail": "Neural model scored 9994/10000"
         },
         {
           "name": "Decision routed",
           "chain": "local-reactive",
-          "txHash": "0xb5f56bd01bcfbe915281ce4cf67cf6c2543fe722ddbd73e287425f6fbb67b1ac",
+          "txHash": "0x20eb17269b7a7dd95aeb7641e94cef17cbb434ea7293e9cdb0847305c0890d8b",
           "blockNumber": 9,
           "gasUsed": "76623",
-          "observedAt": "2026-11-16T17:27:39.584Z",
+          "observedAt": "2026-11-16T18:17:17.096Z",
           "detail": "Reactive applies the immutable 6500 risk threshold"
         },
         {
           "name": "Escrow updated",
           "chain": "local-origin",
-          "txHash": "0x13607ff4c677a8cf93e7d4aa50eace51c406b8a808284c693df71cd77b6d2934",
+          "txHash": "0x86209faff3f365d132357ef4317601cb5c175081b844dd14762cf97d8cc50b70",
           "blockNumber": 16,
           "gasUsed": "74790",
-          "observedAt": "2026-11-16T17:27:39.584Z",
+          "observedAt": "2026-11-16T18:17:17.096Z",
           "detail": "Authenticated callback enforces the decision"
         }
       ],
-      "elapsedMs": 397,
+      "elapsedMs": 152,
       "contracts": {
-        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
-        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
-        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
-        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+        "vault": "0xb80E0C48E1Ec47AaF39Ce78fd2610f4c315673F9",
+        "gateway": "0x082036A80eee8b5217288b15aEC14704a60A844C",
+        "reactive": "0x95515559b0033CD0cf9214380fB6dd7ab219Fc8f",
+        "proxy": "0x951D440aB5649Faf24bf14b033A8b211F4f6cdEC"
       },
       "chainIds": {
         "origin": 31337,

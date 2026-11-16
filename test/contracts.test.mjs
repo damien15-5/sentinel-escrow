@@ -152,3 +152,25 @@ test('worker retry preserves the original report bytes across submission failure
   const reported=await processJob(args);
   assert.equal(fs.readFileSync(file,'utf8'),before);assert.equal(reported.reportHash,keccak256(toUtf8Bytes(before)));
 });
+test('size-aware policy: same live score clears a small deposit and freezes a large one',async()=>{
+  const small=await localLoop(f,SCENARIOS.borderline.listing,()=>{},'.01');
+  const large=await localLoop(f,SCENARIOS.borderline.listing,()=>{},'1');
+  assert.equal(small.report.score,large.report.score);
+  assert.ok(small.report.score>=5000&&small.report.score<6500,`borderline score ${small.report.score}`);
+  assert.equal(small.threshold,6500);assert.equal(small.status,'Cleared');
+  assert.equal(large.threshold,5000);assert.equal(large.status,'Frozen');
+});
+test('size-aware threshold is fixed at deposit time and preserved by retry',async()=>{
+  const {receipt,id}=await openLocal(f,SCENARIOS.safe.listing,3600,'1');await relay(f,receipt,f.vault,'EscrowOpened');
+  assert.equal((await f.reactive.requests(id)).threshold,5000n);
+  const report=await(await f.gateway.connect(f.reporter).reportRisk(id,5000,MODEL_HASH)).wait();
+  const decision=await relay(f,report,f.gateway,'RiskReported');
+  assert.equal(event(decision.reactiveReceipt,f.reactive,'DecisionRouted').parsed.args.thresholdApplied,5000n);
+  await f.omniRaw.request({method:'evm_increaseTime',params:[31]});await f.omniRaw.request({method:'evm_mine',params:[]});
+  const retried=await(await f.reactive.retryDelivery(id)).wait();
+  const decoded=f.gateway.interface.decodeFunctionData('deliverDecision',event(retried,f.system,'CallbackRequested').parsed.args.payload);
+  assert.equal(decoded.frozen,true);
+});
+test('constructor rejects a high-value threshold looser than the base threshold',async()=>{
+  await assert.rejects(()=>deploy('SentinelReactive',f.omniOwner,[31337,6500,7000,parseEther('1'),MODEL_HASH],parseEther('1')));
+});
