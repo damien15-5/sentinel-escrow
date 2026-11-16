@@ -1,0 +1,26 @@
+SENTINEL ESCROW
+Reactive Omni + live neural assessment
+
+1. Install Node.js 22 LTS or newer (https://nodejs.org/).
+2. Unzip this folder and open a terminal inside it.
+3. Run: npm ci
+4. Run: npm test
+5. Run: npm start
+6. Open http://localhost:3000 in your browser.
+
+The local dashboard needs no wallet or AI API key.
+Choose a listing, run the six-transaction loop, then release or refund.
+Stop with Ctrl+C. Local chains reset on restart.
+
+To deploy later: docs/DEPLOYMENT.md
+To prepare the entry: docs/SUBMISSION.md
+Research and source links: docs/RESEARCH.md
+Full explanation: README.md
+
+This ZIP contains source, model weights, compiled contracts, tests and example
+local receipts. Install dependencies with npm ci; node_modules is not bundled.
+
+No public deployment, registration, repository publication or submission has
+been performed. Local evidence is not Lasna/Base Sepolia submission proof.
+The neural model uses synthetic training data and is not a production fraud
+detector. The source includes the known limitations and a failing model probe.

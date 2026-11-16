@@ -1,0 +1,330 @@
+{
+  "generatedAt": "2026-11-16T17:27:39.590Z",
+  "mode": "local-simulation",
+  "runs": [
+    {
+      "schemaVersion": 1,
+      "mode": "local-simulation",
+      "networkDisclaimer": "Two local EVM chains with mock Omni transport. These are real local receipts, not Lasna/Base Sepolia transactions or latency measurements.",
+      "id": "1",
+      "listing": "Studio headphones, model HD600. Tested condition with serial number and photos included. Shipping with tracking within 3 days. Buyer inspection and refund policy through escrow.",
+      "threshold": 6500,
+      "status": "Cleared",
+      "amountEth": ".01",
+      "report": {
+        "schemaVersion": 1,
+        "model": "sentinel-mlp-v1",
+        "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+        "context": {
+          "chainId": 31337,
+          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "escrowId": "1"
+        },
+        "contentHash": "0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143",
+        "score": 0,
+        "features": {
+          "credential_request": 0,
+          "off_platform_payment": 0,
+          "guaranteed_returns": 0,
+          "urgency": 0,
+          "irreversible_payment": 0,
+          "impersonation": 0,
+          "missing_details": 0,
+          "buyer_protection": 1,
+          "delivery_terms": 1,
+          "specific_description": 1
+        },
+        "assessedAt": "2026-11-16T17:27:38.711Z",
+        "inferenceMs": 1.222,
+        "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
+        "reportHash": "0xf45ffb596ee8860bc994e93b371961f560eaa977ce35d6754d8953b92a51e88f",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"1\"},\"contentHash\":\"0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143\",\"score\":0,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":0,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":1,\"specific_description\":1},\"assessedAt\":\"2026-11-16T17:27:38.711Z\",\"inferenceMs\":1.222,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+      },
+      "steps": [
+        {
+          "name": "Escrow opened",
+          "chain": "local-origin",
+          "txHash": "0x157ee948c9923cdb971d1e9b724ca1f5c51379579c6aedcf519096e9184882c3",
+          "blockNumber": 5,
+          "gasUsed": "174164",
+          "observedAt": "2026-11-16T17:27:38.570Z",
+          "detail": "Buyer deposit locked; listing committed on-chain"
+        },
+        {
+          "name": "Assessment routed",
+          "chain": "local-reactive",
+          "txHash": "0x25deb5fe9943278ce4bce1747775df23c059b95a658d5cd4652935e1a81b9ef0",
+          "blockNumber": 4,
+          "gasUsed": "95581",
+          "observedAt": "2026-11-16T17:27:38.709Z",
+          "detail": "Reactive validates origin and requests a callback"
+        },
+        {
+          "name": "AI job requested",
+          "chain": "local-origin",
+          "txHash": "0xf90a666dfc5655c2e8d3b9a8b87b58b42b5e1a252f6f0e1bed9ba71a2271a506",
+          "blockNumber": 6,
+          "gasUsed": "93507",
+          "observedAt": "2026-11-16T17:27:38.709Z",
+          "detail": "Authenticated callback creates the inference job"
+        },
+        {
+          "name": "Live AI report committed",
+          "chain": "local-origin",
+          "txHash": "0x4f6058b6afb69f3aa7529a0e491a43e0e51bb2c26c39acc7a3b8f062bb197b27",
+          "blockNumber": 7,
+          "gasUsed": "54519",
+          "observedAt": "2026-11-16T17:27:38.751Z",
+          "detail": "Neural model scored 0/10000"
+        },
+        {
+          "name": "Decision routed",
+          "chain": "local-reactive",
+          "txHash": "0x6494e674647d2743ce1b62d347580d9a3e1d6f0162a68729038f15f0d899e1c6",
+          "blockNumber": 5,
+          "gasUsed": "76599",
+          "observedAt": "2026-11-16T17:27:38.856Z",
+          "detail": "Reactive applies the immutable 6500 risk threshold"
+        },
+        {
+          "name": "Escrow updated",
+          "chain": "local-origin",
+          "txHash": "0x66c9e19f13e8346fb5784303ea07d2169b9113f33faaa89a3407eaa4c5666710",
+          "blockNumber": 8,
+          "gasUsed": "74764",
+          "observedAt": "2026-11-16T17:27:38.857Z",
+          "detail": "Authenticated callback enforces the decision"
+        }
+      ],
+      "elapsedMs": 437,
+      "contracts": {
+        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
+        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
+        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+      },
+      "chainIds": {
+        "origin": 31337,
+        "reactive": 31338
+      },
+      "scenario": "safe",
+      "title": "Studio headphones · verified details"
+    },
+    {
+      "schemaVersion": 1,
+      "mode": "local-simulation",
+      "networkDisclaimer": "Two local EVM chains with mock Omni transport. These are real local receipts, not Lasna/Base Sepolia transactions or latency measurements.",
+      "id": "2",
+      "listing": "Official support agent: verify your wallet immediately. Send your seed phrase and private key on Telegram to unlock your account. Pay directly outside escrow, crypto only, no refunds. Guaranteed double your investment returns. Act now.",
+      "threshold": 6500,
+      "status": "Frozen",
+      "amountEth": ".01",
+      "report": {
+        "schemaVersion": 1,
+        "model": "sentinel-mlp-v1",
+        "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+        "context": {
+          "chainId": 31337,
+          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "escrowId": "2"
+        },
+        "contentHash": "0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec",
+        "score": 10000,
+        "features": {
+          "credential_request": 1,
+          "off_platform_payment": 1,
+          "guaranteed_returns": 1,
+          "urgency": 1,
+          "irreversible_payment": 1,
+          "impersonation": 1,
+          "missing_details": 0,
+          "buyer_protection": 1,
+          "delivery_terms": 0,
+          "specific_description": 0
+        },
+        "assessedAt": "2026-11-16T17:27:39.036Z",
+        "inferenceMs": 0.101,
+        "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
+        "reportHash": "0x0d986b4333269d65a87c967b76d6abc40dd986d05c280883baff78f580ce8119",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"2\"},\"contentHash\":\"0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec\",\"score\":10000,\"features\":{\"credential_request\":1,\"off_platform_payment\":1,\"guaranteed_returns\":1,\"urgency\":1,\"irreversible_payment\":1,\"impersonation\":1,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":0,\"specific_description\":0},\"assessedAt\":\"2026-11-16T17:27:39.036Z\",\"inferenceMs\":0.101,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+      },
+      "steps": [
+        {
+          "name": "Escrow opened",
+          "chain": "local-origin",
+          "txHash": "0xe8b65507b608503e10f58ced2d06c55824de2bb16519e97bb5c330c0319dfb32",
+          "blockNumber": 9,
+          "gasUsed": "158558",
+          "observedAt": "2026-11-16T17:27:38.932Z",
+          "detail": "Buyer deposit locked; listing committed on-chain"
+        },
+        {
+          "name": "Assessment routed",
+          "chain": "local-reactive",
+          "txHash": "0x9fcaa507679b2f4f1ab410ca43d259b5e3dec2375501a0a24b9cb4bf8121a23b",
+          "blockNumber": 6,
+          "gasUsed": "96558",
+          "observedAt": "2026-11-16T17:27:39.035Z",
+          "detail": "Reactive validates origin and requests a callback"
+        },
+        {
+          "name": "AI job requested",
+          "chain": "local-origin",
+          "txHash": "0x27fcbf82e8038b76dcce6c011a99604bcf3a8429b710d3219d1e00f73e5701c7",
+          "blockNumber": 10,
+          "gasUsed": "93507",
+          "observedAt": "2026-11-16T17:27:39.035Z",
+          "detail": "Authenticated callback creates the inference job"
+        },
+        {
+          "name": "Live AI report committed",
+          "chain": "local-origin",
+          "txHash": "0x6997407bf428bdb4dbd3593dbbec7dc06e9f10f5a4115abe2c1d31b21f38921d",
+          "blockNumber": 11,
+          "gasUsed": "54543",
+          "observedAt": "2026-11-16T17:27:39.078Z",
+          "detail": "Neural model scored 10000/10000"
+        },
+        {
+          "name": "Decision routed",
+          "chain": "local-reactive",
+          "txHash": "0x33b65a14203167126723c237962917d3eae084878139a63bccdbc51378c2dbf0",
+          "blockNumber": 7,
+          "gasUsed": "76623",
+          "observedAt": "2026-11-16T17:27:39.180Z",
+          "detail": "Reactive applies the immutable 6500 risk threshold"
+        },
+        {
+          "name": "Escrow updated",
+          "chain": "local-origin",
+          "txHash": "0xf6f43c4808265ffeeb1ef100c299724a9bf224402b665d17c6b155ef025f48ee",
+          "blockNumber": 12,
+          "gasUsed": "74790",
+          "observedAt": "2026-11-16T17:27:39.180Z",
+          "detail": "Authenticated callback enforces the decision"
+        }
+      ],
+      "elapsedMs": 325,
+      "contracts": {
+        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
+        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
+        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+      },
+      "chainIds": {
+        "origin": 31337,
+        "reactive": 31338
+      },
+      "scenario": "risky",
+      "title": "Wallet verification · urgent transfer"
+    },
+    {
+      "schemaVersion": 1,
+      "mode": "local-simulation",
+      "networkDisclaimer": "Two local EVM chains with mock Omni transport. These are real local receipts, not Lasna/Base Sepolia transactions or latency measurements.",
+      "id": "3",
+      "listing": "Mystery electronics bundle, details later. Trust me. Today only, hurry. Shipping available.",
+      "threshold": 6500,
+      "status": "Frozen",
+      "amountEth": ".01",
+      "report": {
+        "schemaVersion": 1,
+        "model": "sentinel-mlp-v1",
+        "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+        "context": {
+          "chainId": 31337,
+          "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+          "escrowId": "3"
+        },
+        "contentHash": "0x6473a0ad4357f9536ede9351cf1b10d80a826b4c024845fe415159680a0c35ea",
+        "score": 9994,
+        "features": {
+          "credential_request": 0,
+          "off_platform_payment": 0,
+          "guaranteed_returns": 0,
+          "urgency": 1,
+          "irreversible_payment": 0,
+          "impersonation": 0,
+          "missing_details": 1,
+          "buyer_protection": 0,
+          "delivery_terms": 0.5,
+          "specific_description": 0
+        },
+        "assessedAt": "2026-11-16T17:27:39.417Z",
+        "inferenceMs": 0.166,
+        "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability.",
+        "reportHash": "0x3d7a50536bc4d96ce136760a3cf7cdce0229e4b226fcfe37e6819d8eb2544f91",
+        "serialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":31337,\"gateway\":\"0x4A61C72c11B40Afa241D4aADA42354A54807Ca48\",\"escrowId\":\"3\"},\"contentHash\":\"0x6473a0ad4357f9536ede9351cf1b10d80a826b4c024845fe415159680a0c35ea\",\"score\":9994,\"features\":{\"credential_request\":0,\"off_platform_payment\":0,\"guaranteed_returns\":0,\"urgency\":1,\"irreversible_payment\":0,\"impersonation\":0,\"missing_details\":1,\"buyer_protection\":0,\"delivery_terms\":0.5,\"specific_description\":0},\"assessedAt\":\"2026-11-16T17:27:39.417Z\",\"inferenceMs\":0.166,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}"
+      },
+      "steps": [
+        {
+          "name": "Escrow opened",
+          "chain": "local-origin",
+          "txHash": "0x77314102762cd3feb3fe1b00818c325da8aeb2632bb9ad0e9095284e0de2c3d4",
+          "blockNumber": 13,
+          "gasUsed": "154834",
+          "observedAt": "2026-11-16T17:27:39.290Z",
+          "detail": "Buyer deposit locked; listing committed on-chain"
+        },
+        {
+          "name": "Assessment routed",
+          "chain": "local-reactive",
+          "txHash": "0x56986dea901db3b4d2f05eb50309c32f1a8f0355afbb7d32975ae534d66ab873",
+          "blockNumber": 8,
+          "gasUsed": "94116",
+          "observedAt": "2026-11-16T17:27:39.417Z",
+          "detail": "Reactive validates origin and requests a callback"
+        },
+        {
+          "name": "AI job requested",
+          "chain": "local-origin",
+          "txHash": "0x040b8dedc4bdbb0287a1065b3ccdb428f8d9a4aa4d32b25cca77210b4e004214",
+          "blockNumber": 14,
+          "gasUsed": "93507",
+          "observedAt": "2026-11-16T17:27:39.417Z",
+          "detail": "Authenticated callback creates the inference job"
+        },
+        {
+          "name": "Live AI report committed",
+          "chain": "local-origin",
+          "txHash": "0x561f0a397f35f3bee22132a8de42ec66037bfc529abd96873a3c84e72a8ffbe9",
+          "blockNumber": 15,
+          "gasUsed": "54543",
+          "observedAt": "2026-11-16T17:27:39.451Z",
+          "detail": "Neural model scored 9994/10000"
+        },
+        {
+          "name": "Decision routed",
+          "chain": "local-reactive",
+          "txHash": "0xb5f56bd01bcfbe915281ce4cf67cf6c2543fe722ddbd73e287425f6fbb67b1ac",
+          "blockNumber": 9,
+          "gasUsed": "76623",
+          "observedAt": "2026-11-16T17:27:39.584Z",
+          "detail": "Reactive applies the immutable 6500 risk threshold"
+        },
+        {
+          "name": "Escrow updated",
+          "chain": "local-origin",
+          "txHash": "0x13607ff4c677a8cf93e7d4aa50eace51c406b8a808284c693df71cd77b6d2934",
+          "blockNumber": 16,
+          "gasUsed": "74790",
+          "observedAt": "2026-11-16T17:27:39.584Z",
+          "detail": "Authenticated callback enforces the decision"
+        }
+      ],
+      "elapsedMs": 397,
+      "contracts": {
+        "vault": "0x68e2e3bB6298966c2335b5691062Ec2dB356cDa4",
+        "gateway": "0x4A61C72c11B40Afa241D4aADA42354A54807Ca48",
+        "reactive": "0xc5AB72713A92B1dBbB87b52AbD2ae81720034Ee8",
+        "proxy": "0xc98AF688632B87c1Ee1430E3a574F802f63A39F8"
+      },
+      "chainIds": {
+        "origin": 31337,
+        "reactive": 31338
+      },
+      "scenario": "ambiguous",
+      "title": "Mystery electronics · incomplete listing"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+
+> sentinel-escrow@0.1.0 test
+> node scripts/test.mjs
+
+This version of µWS is not compatible with your Node.js build:
+
+Error: Cannot find module '../binaries/uws_linux_x64_137.node'
+Require stack:
+- /workspace/sentinel-escrow/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+- /workspace/sentinel-escrow/node_modules/ganache/dist/node/core.js
+Falling back to a NodeJS implementation; performance may be degraded.
+
+
+Compiled 5 Solidity sources with 0.8.29+commit.ab55807c.Emscripten.clang
+✔ safe listing traverses both reactive callbacks; only buyer may release (1624.227473ms)
+✔ risky listing freezes; buyer refunds; seller never takes funds (780.374714ms)
+✔ direct callers cannot forge react, gateway callbacks, decisions or reports (226.246568ms)
+✔ legitimate proxy rejects callbacks from a different reactive contract (450.004244ms)
+✔ reactive validates source chain, contract, topic and topic count (293.272046ms)
+✔ duplicate origin events request only one assessment (389.477166ms)
+✔ report cannot precede job; invalid, duplicate and expired reports fail (421.24686ms)
+✔ report threshold boundary freezes at exactly 6500 and clears at 6499 (1356.127844ms)
+✔ AI worker processes an on-chain job with live inference and safely skips replay (426.956922ms)
+✔ callback replay cannot reverse a refund (862.393789ms)
+✔ timestamp timeout returns pending funds after a stalled AI pipeline (606.481085ms)
+✔ callback fee payer cannot drain escrow deposits (298.517661ms)
+✔ configuration is one-time and owner-only (52.031158ms)
+✔ input validation rejects empty, oversized, self-directed or unfunded listings (81.270264ms)
+✔ reentrant buyer cannot withdraw the deposit twice (1299.266561ms)
+✔ report with mismatched commitment or model cannot cause a decision (593.815981ms)
+✔ owner retry replays only the stored decision and preserves threshold (1003.243979ms)
+✔ worker retry preserves the original report bytes across submission failures (542.768688ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14928.292431
+This version of µWS is not compatible with your Node.js build:
+
+Error: Cannot find module '../binaries/uws_linux_x64_137.node'
+Require stack:
+- /workspace/sentinel-escrow/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+- /workspace/sentinel-escrow/node_modules/ganache/dist/node/core.js
+Falling back to a NodeJS implementation; performance may be degraded.
+
+
+✔ API rejects cross-origin, malformed and oversized listings (82.692046ms)
+✔ dashboard runs live high-risk assessment, displays six receipts and refunds (3538.732173ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3658.730133
+✔ model is a trained neural network with pinned bytes (2.774219ms)
+✔ safe and malicious probe texts fall on opposite sides of the policy (2.649916ms)
+✔ assessment commits the exact live report and input (3.18455ms)
+✔ prompt injection is treated as data and does not override the neural policy (0.476997ms)
+✔ feature extraction is bounded and rejects invalid input (0.844252ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23.105265

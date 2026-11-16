@@ -1,0 +1,30 @@
+{
+  "name": "sentinel-escrow",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reactive Omni escrow with live neural risk assessment and verifiable callbacks",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "compile": "node scripts/compile.mjs",
+    "train": "node model/train.mjs",
+    "test": "node scripts/test.mjs",
+    "demo": "node scripts/demo.mjs",
+    "start": "node src/server.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "deploy:testnet": "node scripts/deploy.mjs",
+    "worker": "node src/worker.mjs",
+    "evidence": "node scripts/collect-evidence.mjs",
+    "build:web": "node scripts/build-web.mjs"
+  },
+  "dependencies": {
+    "ethers": "6.15.0"
+  },
+  "devDependencies": {
+    "ganache": "7.9.2",
+    "jsdom": "26.1.0",
+    "solc": "0.8.29"
+  }
+}

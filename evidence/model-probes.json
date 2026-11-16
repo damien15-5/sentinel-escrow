@@ -1,0 +1,79 @@
+{
+  "disclaimer": "12 handwritten synthetic held-out probes. Not a real-world fraud accuracy estimate.",
+  "correct": 11,
+  "total": 12,
+  "rows": [
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 0,
+      "listing": "Camera model X200 in tested condition. Photos and serial available. Shipping with tracking."
+    },
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 1,
+      "listing": "Milestone payment for logo delivery within 5 days. Invoice and refund terms included."
+    },
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 3,
+      "listing": "Mechanical keyboard, dimensions listed; photographs show condition. Buyer inspection before payment."
+    },
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 0,
+      "listing": "Used desk with dimensions and photos. Receipt provided; return policy available."
+    },
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 0,
+      "listing": "Headphone model M50, tested. Shipping tracking and inspection through escrow."
+    },
+    {
+      "expected": "clear",
+      "actual": "clear",
+      "score": 76,
+      "listing": "Book bundle. Delivery in 3 days with tracking and receipt."
+    },
+    {
+      "expected": "hold",
+      "actual": "hold",
+      "score": 10000,
+      "listing": "Your account suspended. Official support needs your recovery phrase and wallet password."
+    },
+    {
+      "expected": "hold",
+      "actual": "hold",
+      "score": 10000,
+      "listing": "Act now. Risk-free daily returns. Double your money with guaranteed instant profit."
+    },
+    {
+      "expected": "hold",
+      "actual": "hold",
+      "score": 10000,
+      "listing": "Pay directly outside the platform using a gift card. No refunds."
+    },
+    {
+      "expected": "hold",
+      "actual": "hold",
+      "score": 10000,
+      "listing": "Send private key to verify your wallet. Official support on Telegram."
+    },
+    {
+      "expected": "hold",
+      "actual": "clear",
+      "score": 4956,
+      "listing": "Secret deal, details later, no questions. Trust me."
+    },
+    {
+      "expected": "hold",
+      "actual": "hold",
+      "score": 10000,
+      "listing": "Urgent wire transfer. Pay directly on WhatsApp. Last chance."
+    }
+  ]
+}
