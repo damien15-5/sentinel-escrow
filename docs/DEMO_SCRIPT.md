@@ -28,3 +28,13 @@ Keep `npm run worker` running in a visible terminal.
 5. Download evidence and inspect the model tab.
 
 Label this rehearsal **local simulation**. The dashboard is a local tool; the final testnet demo should use actual explorers and worker logs alongside it. This ZIP includes the script, not a fabricated submission video.
+
+## Produced video (2026-11-16)
+
+`sentinel-demo.mp4` (2:07, 1280×720 H.264 + AAC) is published as a release asset: https://github.com/damien15-5/sentinel-escrow/releases/download/v1.0-buildathon/sentinel-demo.mp4. It was built only from real material:
+- A fresh live loop recorded that evening: **#5 safe → Cleared → released** and **#6 risky → Frozen → refunded**.
+- The terminal output of `npm run worker`, `scripts/live-run.mjs` and `scripts/manage.mjs`, rendered as frames and time-compressed (the frames say so).
+- Headless-Chromium screenshots of the Etherscan and Reactscan pages for those transactions, and of the dashboard's read-only Live testnet tab.
+- Earlier verified evidence for the size-aware pair, #3 and #4. #4 was later refunded by the buyer (0x0c33fefa…1854f3).
+
+The voiceover is local Piper TTS (en_US-lessac-medium). The diagrams and cards are plain slides; no UI was mocked.

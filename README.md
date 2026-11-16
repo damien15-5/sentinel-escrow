@@ -2,13 +2,18 @@
 
 **A live neural model assesses a trade. Reactive Omni enforces the decision. The buyer controls the money.**
 
-Built from scratch on November 16, 2026 for the **Reactive Meets AI** track. It is **live on Reactive Lasna + Ethereum Sepolia**, with four complete, independently verified loops (see [Live testnet deployment](#live-testnet-deployment)). It has not yet been published or submitted to DoraHacks.
+Built from scratch on November 16, 2026 for the **Reactive Meets AI** track. It is **live on Reactive Lasna + Ethereum Sepolia**, with six complete, independently verified loops (see [Live testnet deployment](#live-testnet-deployment)). It has not yet been published or submitted to DoraHacks.
+
+![Sentinel Escrow](docs/media/cover.png)
+
+**Demo video (2:07):** https://github.com/damien15-5/sentinel-escrow/releases/download/v1.0-buildathon/sentinel-demo.mp4 · **Repo:** https://github.com/damien15-5/sentinel-escrow
 
 ## Start here
 
-Install **Node.js 22 LTS or newer** (tested with Node 24.22.1) and npm. Unzip this directory, open a terminal in it, then:
+Install **Node.js 22 LTS or newer** (tested with Node 24.22.1) and npm. Clone the repository, open a terminal in it, then:
 
 ```sh
+git clone https://github.com/damien15-5/sentinel-escrow && cd sentinel-escrow
 npm ci
 npm test
 npm start
@@ -16,7 +21,7 @@ npm start
 
 Open **http://localhost:3000**. Select a normal or high-risk listing, run the escrow, inspect the six transaction receipts, then release or refund the local deposit. No wallet, faucet, paid AI API, or external RPC is needed for this local demo. Keep the terminal running. Ctrl+C stops the server.
 
-The checked-in model weights are ready to use. `node_modules` is intentionally excluded from the ZIP; `npm ci` downloads the pinned dependencies. On some Node/platform versions Ganache prints a native µWS warning and uses its working JavaScript fallback. The lockfile explicitly marks Ganache's bundled macOS-only `fsevents` package optional so clean Linux installs work; preserve the provided lockfile.
+The checked-in model weights are ready to use. `node_modules` is not committed; `npm ci` downloads the pinned dependencies. On some Node/platform versions Ganache prints a native µWS warning and uses its working JavaScript fallback. The lockfile explicitly marks Ganache's bundled macOS-only `fsevents` package optional so clean Linux installs work; preserve the provided lockfile.
 
 ```sh
 npm run demo              # Three complete local EVM runs; writes evidence/local-demo.json
@@ -30,11 +35,11 @@ node model/evaluate.mjs   # Held-out synthetic probe report, including failures
 | Component | Behavior |
 | --- | --- |
 | `EscrowVault.sol` | Holds buyer ETH; blocks payout while pending/frozen; buyer-only release; immediate frozen refund or timestamp timeout |
-| `SentinelReactive.sol` | Omni event subscriptions, origin validation, immutable threshold, two callback stages, controlled retry |
+| `SentinelReactive.sol` | Omni event subscriptions, origin validation, size-aware threshold fixed at deposit time, two callback stages, controlled retry |
 | `AssessmentGateway.sol` | Authenticates proxy AND reactive sender; creates AI jobs; accepts one report from the pinned reporter |
 | `src/worker.mjs` | Reads confirmed jobs, verifies listing commitments, executes neural inference, stores exact reports and commits hashes |
 | `model/` | Reproducible 145-parameter MLP, checked-in weights, feature extractor and transparent evaluation |
-| `web/` + local API | Responsive control room, custom inputs, transaction trace, evidence downloads, buyer release/refund controls |
+| `web/` + local API | Responsive control room, custom inputs, transaction trace, evidence downloads, buyer release/refund controls, plus a read-only **Live testnet** tab (reads EscrowVault storage over `ORIGIN_RPC_URL`, links the verified evidence; no keys) |
 | `scripts/` | Compile, deployment/resume, network checks, fee health, sample trades, operations and testnet evidence collection |
 | `test/` | Contract authorization, state transitions, malicious inputs, replay/reentrancy protection, model and dashboard/API tests |
 | `docs/` | Research, architecture, threat model, deployment guide, submission draft and a timed demo script |
@@ -97,6 +102,8 @@ Policy: freeze if score ≥ 6500 bps, or ≥ 5000 bps for deposits ≥ 0.001 ETH
 | #2 | risky / 0.0001 ETH | 10000 → 6500 | [`0x2ce8dbd4…7db885`](https://sepolia.etherscan.io/tx/0x2ce8dbd44a9edf82ddf1397938a868b0605d55fb1a67630bd773e42ba97db885) | [`0x19d9d128…71156e`](https://lasna.reactscan.net/tx/0x19d9d128fac4ec0a32fe8a0f34ca5bad3ed10bb407b66e30b6f005783971156e) | [`0x16bc6833…6e7492`](https://sepolia.etherscan.io/tx/0x16bc683306f745d6d903dbb785bed0cf6fa00e084c1f7e0ab41ebe5d2b6e7492) | [`0x40c40589…08f20e`](https://sepolia.etherscan.io/tx/0x40c405897227b1b9653fa2cbda30cf8b977b7249855000717d0f6c530308f20e) | [`0xb9541992…ecbd14`](https://lasna.reactscan.net/tx/0xb95419929dd5129c7a83bbdbf52fa60ad686f5721e61737fbb02b34879ecbd14) | [`0x6c6cf92b…2aaddc`](https://sepolia.etherscan.io/tx/0x6c6cf92b34ab91598ef1c31b62c6fefb83f473e7e8256ac7babb2f361c2aaddc) | **Frozen** | 58.973 s |
 | #3 | borderline / 0.0001 ETH | 6134 → 6500 | [`0x6aabcfa2…22c07d`](https://sepolia.etherscan.io/tx/0x6aabcfa2b16426bf1dfa40864973be6bf425b5dc2cb5bc58831c422d7622c07d) | [`0xaf2c2a25…c7f400`](https://lasna.reactscan.net/tx/0xaf2c2a25f5cec44a8db1ca568f583e159a6553621beed9ca08937a47adc7f400) | [`0x8788ab92…e813fc`](https://sepolia.etherscan.io/tx/0x8788ab92fe722d86979063430a5c0df45870ca1a18d978c9d35057ca9de813fc) | [`0xf78e5d70…9daebf`](https://sepolia.etherscan.io/tx/0xf78e5d70b5c587e5c2811a8dcbc96d45a6cd57b57453b2d9cc5e6866ec9daebf) | [`0xf379aa01…71d4a2`](https://lasna.reactscan.net/tx/0xf379aa01b76c01cabc9a6ace22e426f0be90e57aadeeef6ce6469aa12f71d4a2) | [`0x9e3f2179…028f45`](https://sepolia.etherscan.io/tx/0x9e3f217928103db4da102667cb3fd70fbc977c42b73218e8409d3be130028f45) | **Cleared** | 60.757 s |
 | #4 | borderline / 0.001 ETH | 6134 → 5000 | [`0x106cd310…82716b`](https://sepolia.etherscan.io/tx/0x106cd31034891d33bdc9f31ff28e8ec226f70888c3fbc025d086339a2982716b) | [`0xe6bf9052…88a55b`](https://lasna.reactscan.net/tx/0xe6bf9052a83aca3b7243f5c06722d6f4c034e97a1089096b373e54934188a55b) | [`0x449ada71…a4f3be`](https://sepolia.etherscan.io/tx/0x449ada71c7506d7061d00fbbb883813bb79cd2b60a5b1ed9ab43346feba4f3be) | [`0x24c9b7ce…e12566`](https://sepolia.etherscan.io/tx/0x24c9b7ced6ce3731e570b3b236c325f983622ae37eda7a56282b05f012e12566) | [`0xac2b20d5…987d40`](https://lasna.reactscan.net/tx/0xac2b20d5f5bfdb24c3851e8592714b9bb98cdbf3fed26346e026e0a1f8987d40) | [`0xffdad6f8…9891f1`](https://sepolia.etherscan.io/tx/0xffdad6f80adb6b5ab5d7faf46d58c4076011e622e43ab9bb6e3404e0399891f1) | **Frozen** | 60.601 s |
+| #5 | safe / 0.0001 ETH | 0 → 6500 | [`0x9e68b1de…1d494d`](https://sepolia.etherscan.io/tx/0x9e68b1deeac0c48c741bfd5c6362bc99d7e8a9ef639261baa0868184701d494d) | [`0x9a2705f3…8545ed`](https://lasna.reactscan.net/tx/0x9a2705f391a3060345fd35248612ea83029d8b270390049f6a5d6bd0e18545ed) | [`0x14d8cbe5…3f727e`](https://sepolia.etherscan.io/tx/0x14d8cbe517340ba9292d645bbbb23a834336620ea4a1a55889e995d5af3f727e) | [`0xe72b071f…8026bd`](https://sepolia.etherscan.io/tx/0xe72b071f3cf7e2ebde51bcc323e2a3e6126610ca5a66d1980913d5bcaa8026bd) | [`0xf378cb2a…4fe077`](https://lasna.reactscan.net/tx/0xf378cb2a97851154cc053f46dd0f2f6a2a4552b22685548743d89d86e24fe077) | [`0x06535cfd…20d063`](https://sepolia.etherscan.io/tx/0x06535cfdec16c4e7a6cb36c516858f45a5e1688c0fd4ca65302d75534f20d063) | **Cleared** | 56.463 s |
+| #6 | risky / 0.0001 ETH | 10000 → 6500 | [`0x81d34c5d…513511`](https://sepolia.etherscan.io/tx/0x81d34c5d74b6b64bf958f3d4db1cc6453881e38273bfcdd5b3b30685eb513511) | [`0xadaedacb…e3ba58`](https://lasna.reactscan.net/tx/0xadaedacbd88c92a53fe1565eab93e0a14b215b3e4b48340e5f46df3a01e3ba58) | [`0x1757fe08…587bf6`](https://sepolia.etherscan.io/tx/0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6) | [`0xcbde451d…d0197b`](https://sepolia.etherscan.io/tx/0xcbde451d4fd637819838fce1b9ab39e9161f9598e9e5dfacb1bde0201ad0197b) | [`0xe35d8c75…551885`](https://lasna.reactscan.net/tx/0xe35d8c75f153f873a41c0623a48a1f27086fd2ba0f710239496a43c3ea551885) | [`0xa6ab4245…367f56`](https://sepolia.etherscan.io/tx/0xa6ab4245d3321570437c497d212093ad3179359ba6b8175853cf57b752367f56) | **Frozen** | 59.812 s |
 
 Wall-clock legs (seconds after the previous stage was seen; 1 s RPC polling):
 
@@ -106,8 +113,18 @@ Wall-clock legs (seconds after the previous stage was seen; 1 s RPC polling):
 | #2 | 1.059 | 11.792 | 35.096 | 1.343 | 9.683 |
 | #3 | 1.035 | 11.702 | 34.059 | 1.286 | 12.675 |
 | #4 | 1.192 | 10.588 | 37.979 | 1.337 | 9.505 |
+| #5 | 1.029 | 9.679 | 34.585 | 2.65 | 8.52 |
+| #6 | 2.337 | 9.538 | 35.083 | 1.228 | 11.626 |
 
-Buyer settlements: release of cleared #1 [`0x9956291f…128cd9`](https://sepolia.etherscan.io/tx/0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9), refund of frozen #2 [`0xafaed4da…70a114`](https://sepolia.etherscan.io/tx/0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114). Escrows #3 (Cleared) and #4 (Frozen) were left open for the demo video.
+Buyer settlements (buyer-signed, after the Reactive decision):
+
+| Escrow | Action | Precondition | Tx |
+|---|---|---|---|
+| #1 | release | Cleared (score 0 < 6500) | [`0x9956291f…128cd9`](https://sepolia.etherscan.io/tx/0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9) |
+| #2 | refund | Frozen (score 10000 >= 6500) | [`0xafaed4da…70a114`](https://sepolia.etherscan.io/tx/0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114) |
+| #5 | release | Cleared (score 0 < 6500), recorded for the demo video | [`0x9f9c8b12…74cb5e`](https://sepolia.etherscan.io/tx/0x9f9c8b1206eab6201df80a4ea578553e70760d9648fe4e68633dd0d08674cb5e) |
+| #6 | refund | Frozen (score 10000 >= 6500), recorded for the demo video | [`0xff93f462…101197`](https://sepolia.etherscan.io/tx/0xff93f46257c1613101a928be3ed8d9026aa97a3a4a084fb48659a8a60c101197) |
+| #4 | refund | Frozen (score 6134 >= 5000, high-value deposit) | [`0x0c33fefa…1854f3`](https://sepolia.etherscan.io/tx/0x0c33fefa3a6d526c1a7233960fc57d890bccc55e4caed4c6f1e4e4ab961854f3) |
 <!-- LIVE:END -->
 
 **Size-aware policy.** Escrows #3 and #4 carry the *same* listing, and the live model scored both at 6134 bps. Reactive cleared the 0.0001 ETH deposit at the base threshold of 6500 and froze the 0.001 ETH deposit at the stricter 5000. The threshold is chosen inside `SentinelReactive.react()` from the deposit amount in `EscrowOpened` and stored with the request, so a retry can never change it.
@@ -129,7 +146,9 @@ Read [RESEARCH.md](docs/RESEARCH.md) for verified rules and unresolved questions
 - Compiler standard JSON input and ABI/bytecode artifacts are included in the download and regenerated by `npm run compile`.
 - Local chains use ephemeral accounts and reset when the server exits. Archived runs are labeled and cannot be settled.
 - Fresh current-session runs are recorded under ignored `.state/`; preserve downloaded evidence before restarting.
-- The ZIP has no wallet keys, `.env`, dependencies, runtime checkpoints or false deployment addresses.
+- The repository has no wallet keys, `.env`, dependencies or runtime checkpoints. Every deployment address and hash comes from mined receipts.
+- **CI:** the GitHub Actions workflow (`npm ci`, compile check, `npm test`, `npm run demo`) is kept at [`docs/ci/github-actions-test.yml`](docs/ci/github-actions-test.yml). It is not enabled in this repository: the token used to push lacked the `workflow` scope. To enable it, copy the file to `.github/workflows/test.yml`.
+- `MANIFEST.sha256` lists SHA-256 hashes of the committed files (`sha256sum -c MANIFEST.sha256`).
 - See [VALIDATION.md](docs/VALIDATION.md) for performed checks and verification boundaries.
 
 MIT license. This is an unaudited hackathon prototype; its testnet-first scope is intentional.

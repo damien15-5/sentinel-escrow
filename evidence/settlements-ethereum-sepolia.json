@@ -2,7 +2,44 @@
   "mode": "testnet",
   "chainId": 11155111,
   "note": "Buyer-signed settlements after Reactive decisions. Hashes printed by scripts/manage.mjs from mined receipts.",
-  "release": {"escrowId": 1, "precondition": "Cleared (score 0 < 6500)", "tx": "0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9", "explorer": "https://sepolia.etherscan.io/tx/0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9"},
-  "frozenRefund": {"escrowId": 2, "precondition": "Frozen (score 10000 >= 6500)", "tx": "0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114", "explorer": "https://sepolia.etherscan.io/tx/0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114"},
-  "leftOpenForDemo": {"3": "Cleared (borderline, small deposit)", "4": "Frozen (borderline, large deposit)"}
+  "settlements": [
+    {
+      "escrowId": 1,
+      "action": "release",
+      "precondition": "Cleared (score 0 < 6500)",
+      "tx": "0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9",
+      "explorer": "https://sepolia.etherscan.io/tx/0x9956291fdf653f67221ea26ff85323c1b9db8ba72ce382c6ee684ef69c128cd9"
+    },
+    {
+      "escrowId": 2,
+      "action": "refund",
+      "precondition": "Frozen (score 10000 >= 6500)",
+      "tx": "0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114",
+      "explorer": "https://sepolia.etherscan.io/tx/0xafaed4da3c2f12bc2fca0960e30a29d911d35a1145345238a04ef2ffda70a114"
+    },
+    {
+      "escrowId": 5,
+      "action": "release",
+      "precondition": "Cleared (score 0 < 6500), recorded for the demo video",
+      "tx": "0x9f9c8b1206eab6201df80a4ea578553e70760d9648fe4e68633dd0d08674cb5e",
+      "explorer": "https://sepolia.etherscan.io/tx/0x9f9c8b1206eab6201df80a4ea578553e70760d9648fe4e68633dd0d08674cb5e"
+    },
+    {
+      "escrowId": 6,
+      "action": "refund",
+      "precondition": "Frozen (score 10000 >= 6500), recorded for the demo video",
+      "tx": "0xff93f46257c1613101a928be3ed8d9026aa97a3a4a084fb48659a8a60c101197",
+      "explorer": "https://sepolia.etherscan.io/tx/0xff93f46257c1613101a928be3ed8d9026aa97a3a4a084fb48659a8a60c101197"
+    },
+    {
+      "escrowId": 4,
+      "action": "refund",
+      "precondition": "Frozen (score 6134 >= 5000, high-value deposit)",
+      "tx": "0x0c33fefa3a6d526c1a7233960fc57d890bccc55e4caed4c6f1e4e4ab961854f3",
+      "explorer": "https://sepolia.etherscan.io/tx/0x0c33fefa3a6d526c1a7233960fc57d890bccc55e4caed4c6f1e4e4ab961854f3"
+    }
+  ],
+  "leftOpen": {
+    "3": "Cleared (borderline, small deposit); release window closes 2026-11-16 19:27 UTC, refundable after that"
+  }
 }

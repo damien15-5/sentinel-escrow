@@ -6,6 +6,7 @@ import {SCENARIOS,features} from '../model/features.mjs';
 import {MODEL_HASH,modelBytes} from './risk.mjs';
 import {json,save} from './chain.mjs';
 import {envInt} from './config.mjs';
+import {testnetView} from './testnet-view.mjs';
 export function createApp(){
   let fixturePromise, busy=false;
   const runs=[];
@@ -19,6 +20,7 @@ export function createApp(){
       if(!/^(localhost|127\.0\.0\.1)(:\d+)?$/.test(host))return reply(403,{error:'Use the loopback URL shown in the terminal'});
       const url=new URL(req.url,`http://${host}`);
       if(req.method==='GET'&&url.pathname==='/api/bootstrap')return reply(200,{mode:'local-simulation',runs:[...runs,...archives],scenarios:SCENARIOS,model:{...JSON.parse(modelBytes),hash:MODEL_HASH,w1:undefined,w2:undefined,b1:undefined,b2:undefined}});
+      if(req.method==='GET'&&url.pathname==='/api/testnet'){try{return reply(200,await testnetView());}catch(error){return reply(502,{configured:true,error:error.shortMessage||error.message});}}
       if(req.method==='POST'){
         if(req.headers.origin&&req.headers.origin!==`http://${host}`)return reply(403,{error:'Origin rejected'});
         if(!req.headers['content-type']?.startsWith('application/json'))return reply(415,{error:'JSON required'});
@@ -63,6 +65,6 @@ export function createApp(){
 if(process.argv[1]===fileURLToPath(import.meta.url)){
   if(!fs.existsSync('artifacts/SentinelReactive.json')){const {compile}=await import('../scripts/compile.mjs');compile();}
   const app=createApp();const port=envInt('PORT',3000,1);
-  app.server.listen(port,'127.0.0.1',()=>console.log(`Sentinel Escrow: http://localhost:${port}\nLocal simulation only. No wallet or API key required. Ctrl+C to stop.`));
+  app.server.listen(port,'127.0.0.1',()=>console.log(`Sentinel Escrow: http://localhost:${port}\nLocal simulation + read-only live testnet view (ORIGIN_RPC_URL). No wallet or key used. Ctrl+C to stop.`));
   for(const signal of ['SIGINT','SIGTERM'])process.once(signal,async()=>{await app.close();process.exit(0);});
 }

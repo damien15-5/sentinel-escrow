@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "mode": "testnet",
+  "escrowId": "6",
+  "complete": true,
+  "checkedAt": "2026-11-16T18:50:10.401Z",
+  "deployment": {
+    "schemaVersion": 2,
+    "mode": "testnet",
+    "originChainId": 11155111,
+    "originName": "ethereum-sepolia",
+    "callbackProxy": "0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4",
+    "reactiveChainId": 5318007,
+    "owner": "0xA3147ab5ce6BDf5FC6D3F2D817282f3D74fC15cb",
+    "reporter": "0x3bDfb5B4D463a07B5049D6594Ff703f3aB4eF8DB",
+    "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+    "threshold": 6500,
+    "highValueThreshold": 5000,
+    "highValueWei": "1000000000000000",
+    "contracts": {
+      "SentinelReactive": {
+        "address": "0x0bFA2E632818E2d152b8135fAb683DDC10922954",
+        "txHash": "0xe26ce93f1f5d16a97f9009e4949fb41c837091736aff6ed6929d843e3d408e3d",
+        "blockNumber": 8509198,
+        "network": "lasna"
+      },
+      "EscrowVault": {
+        "address": "0x07129A520b7B4703F948b0c874D858389B2F27B1",
+        "txHash": "0xb96d172da7827c39079a6675de2d45058b2d27f72c071f89fa3cd67998a92988",
+        "blockNumber": 12149071,
+        "network": "ethereum-sepolia"
+      },
+      "AssessmentGateway": {
+        "address": "0xbFFdFb18931111C1dafce8A8323568cf7874b611",
+        "txHash": "0xd6362da6ce4a6de6387b2a03f73e5a155bd9dd5ee64fc07f56bd779b477e8557",
+        "blockNumber": 12149073,
+        "network": "ethereum-sepolia"
+      }
+    },
+    "createdAt": "2026-11-16T18:22:51.352Z",
+    "ready": true
+  },
+  "steps": [
+    {
+      "name": "origin",
+      "chainId": 11155111,
+      "txHash": "0x81d34c5d74b6b64bf958f3d4db1cc6453881e38273bfcdd5b3b30685eb513511",
+      "blockNumber": 12149195,
+      "blockHash": "0x2adebb05be1a4388b973cd86fb3604e029b6cab2865c510111325c37d613bd8d",
+      "timestamp": 1794854892,
+      "gasUsed": "612758",
+      "explorer": "https://sepolia.etherscan.io/tx/0x81d34c5d74b6b64bf958f3d4db1cc6453881e38273bfcdd5b3b30685eb513511"
+    },
+    {
+      "name": "reactive-request",
+      "chainId": 5318007,
+      "txHash": "0xadaedacbd88c92a53fe1565eab93e0a14b215b3e4b48340e5f46df3a01e3ba58",
+      "blockNumber": 8510623,
+      "blockHash": "0x98342945a9a9b99c5424d0765a47d71c3acf1dca5c97697236767f7c0ffc6675",
+      "timestamp": 1794854893,
+      "gasUsed": "165987",
+      "explorer": "https://lasna.reactscan.net/tx/0xadaedacbd88c92a53fe1565eab93e0a14b215b3e4b48340e5f46df3a01e3ba58"
+    },
+    {
+      "name": "request-callback",
+      "chainId": 11155111,
+      "txHash": "0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6",
+      "blockNumber": 12149196,
+      "blockHash": "0x6b672689b923e77c37f9d3e2998234e136129063b1d71b8a742474d390d88f46",
+      "timestamp": 1794854904,
+      "gasUsed": "311947",
+      "explorer": "https://sepolia.etherscan.io/tx/0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6"
+    },
+    {
+      "name": "ai-report",
+      "chainId": 11155111,
+      "txHash": "0xcbde451d4fd637819838fce1b9ab39e9161f9598e9e5dfacb1bde0201ad0197b",
+      "blockNumber": 12149199,
+      "blockHash": "0x56aa3f563f8bae46ccc2aaff70ef417978a92408fdbb8490a16645f3d07380fb",
+      "timestamp": 1794854940,
+      "gasUsed": "143663",
+      "explorer": "https://sepolia.etherscan.io/tx/0xcbde451d4fd637819838fce1b9ab39e9161f9598e9e5dfacb1bde0201ad0197b"
+    },
+    {
+      "name": "reactive-decision",
+      "chainId": 5318007,
+      "txHash": "0xe35d8c75f153f873a41c0623a48a1f27086fd2ba0f710239496a43c3ea551885",
+      "blockNumber": 8510667,
+      "blockHash": "0x9767b3594e8b0a82d6664027faa309a86ce063e52674e8a7c67b5fde2120981d",
+      "timestamp": 1794854940,
+      "gasUsed": "125219",
+      "explorer": "https://lasna.reactscan.net/tx/0xe35d8c75f153f873a41c0623a48a1f27086fd2ba0f710239496a43c3ea551885"
+    },
+    {
+      "name": "decision-callback",
+      "chainId": 11155111,
+      "txHash": "0xa6ab4245d3321570437c497d212093ad3179359ba6b8175853cf57b752367f56",
+      "blockNumber": 12149200,
+      "blockHash": "0x491d12e12e68729d514b78b1e70844ab72f9390ffbae811cfa7256f62be0b443",
+      "timestamp": 1794854952,
+      "gasUsed": "212394",
+      "explorer": "https://sepolia.etherscan.io/tx/0xa6ab4245d3321570437c497d212093ad3179359ba6b8175853cf57b752367f56"
+    }
+  ],
+  "missing": [],
+  "policy": {
+    "depositWei": "100000000000000",
+    "thresholdApplied": 6500,
+    "baseThreshold": 6500,
+    "highValueThreshold": 5000,
+    "highValueWei": "1000000000000000",
+    "frozen": true,
+    "score": 10000
+  },
+  "callbackRecords": {
+    "reactive-request": {
+      "method": "callback-request+official-proxy+payload-match",
+      "systemRecords": 0,
+      "proxy": "0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4",
+      "signer": "0xF7E866D726658F6C3F14B8EE537fe268a4D91DDb",
+      "destinationTx": "0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6",
+      "gasLimit": "600000"
+    },
+    "reactive-decision": {
+      "method": "callback-request+official-proxy+payload-match",
+      "systemRecords": 0,
+      "proxy": "0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4",
+      "signer": "0xF7E866D726658F6C3F14B8EE537fe268a4D91DDb",
+      "destinationTx": "0xa6ab4245d3321570437c497d212093ad3179359ba6b8175853cf57b752367f56",
+      "gasLimit": "600000"
+    }
+  },
+  "report": {
+    "schemaVersion": 1,
+    "model": "sentinel-mlp-v1",
+    "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+    "context": {
+      "chainId": 11155111,
+      "gateway": "0xbFFdFb18931111C1dafce8A8323568cf7874b611",
+      "escrowId": "6",
+      "originTxHash": "0x81d34c5d74b6b64bf958f3d4db1cc6453881e38273bfcdd5b3b30685eb513511",
+      "requestTxHash": "0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6"
+    },
+    "contentHash": "0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec",
+    "score": 10000,
+    "features": {
+      "credential_request": 1,
+      "off_platform_payment": 1,
+      "guaranteed_returns": 1,
+      "urgency": 1,
+      "irreversible_payment": 1,
+      "impersonation": 1,
+      "missing_details": 0,
+      "buyer_protection": 1,
+      "delivery_terms": 0,
+      "specific_description": 0
+    },
+    "assessedAt": "2026-11-16T18:48:49.971Z",
+    "inferenceMs": 0.126,
+    "disclosure": "Live local neural inference. Synthetic training; score is not a calibrated fraud probability."
+  },
+  "reportSerialized": "{\"schemaVersion\":1,\"model\":\"sentinel-mlp-v1\",\"modelHash\":\"0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531\",\"context\":{\"chainId\":11155111,\"gateway\":\"0xbFFdFb18931111C1dafce8A8323568cf7874b611\",\"escrowId\":\"6\",\"originTxHash\":\"0x81d34c5d74b6b64bf958f3d4db1cc6453881e38273bfcdd5b3b30685eb513511\",\"requestTxHash\":\"0x1757fe08be7d5b783e251ac91dfa4d6f89704352c5f755a76383849741587bf6\"},\"contentHash\":\"0xe8e0a8929a7e165fab0ade94685b1fd2aee597fbf27c832450659e89036eefec\",\"score\":10000,\"features\":{\"credential_request\":1,\"off_platform_payment\":1,\"guaranteed_returns\":1,\"urgency\":1,\"irreversible_payment\":1,\"impersonation\":1,\"missing_details\":0,\"buyer_protection\":1,\"delivery_terms\":0,\"specific_description\":0},\"assessedAt\":\"2026-11-16T18:48:49.971Z\",\"inferenceMs\":0.126,\"disclosure\":\"Live local neural inference. Synthetic training; score is not a calibrated fraud probability.\"}",
+  "observedBlockTimestampDeltaSeconds": 60,
+  "timingNote": "Cross-chain block timestamp difference, not a synchronized end-to-end latency benchmark.",
+  "legSecondsByBlockTimestamp": {
+    "originToReactiveRequest": 1,
+    "reactiveRequestToJobCallback": 11,
+    "jobToAiReport": 36,
+    "aiReportToReactiveDecision": 0,
+    "reactiveDecisionToEscrowCallback": 12,
+    "total": 60
+  }
+}
