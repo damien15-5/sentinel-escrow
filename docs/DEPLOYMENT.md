@@ -1,6 +1,12 @@
-# Deploy to Base Sepolia + Lasna
+# Deploy to Ethereum Sepolia or Base Sepolia + Lasna
 
-No public deployment was performed in this delivery. All addresses and transaction hashes in `evidence/local-demo.json` belong to ephemeral local simulators.
+**Live deployment (2026-11-16): Ethereum Sepolia + Lasna.** See README → Live testnet deployment and `deployments/ethereum-sepolia-lasna.json`. The addresses in `evidence/local-demo.json` belong to ephemeral local simulators.
+
+**Choosing the origin chain.** Set `ORIGIN_RPC_URL` to an Ethereum Sepolia (11155111) or Base Sepolia (84532) RPC. `BASE_RPC_URL` is still accepted. The scripts read the chain id and pick the official callback proxy for it from `src/chain.mjs`:
+- Sepolia: `0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4`
+- Base Sepolia: `0x476F44b11F5C942c58f4c8E3d0300E5710743585`
+
+Any other chain is refused. The size-aware policy is configured with `HIGH_VALUE_THRESHOLD_BPS` and `HIGH_VALUE_ETH`; by default it is disabled (both thresholds equal). On Sepolia (12 s blocks) `CONFIRMATIONS=2` is a reasonable trade-off. Lasna rejects zero-tip EIP-1559 transactions, and `rpc()` sets a minimal tip automatically.
 
 ## 1. Prepare
 

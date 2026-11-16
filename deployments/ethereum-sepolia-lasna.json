@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 2,
+  "mode": "testnet",
+  "originChainId": 11155111,
+  "originName": "ethereum-sepolia",
+  "callbackProxy": "0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4",
+  "reactiveChainId": 5318007,
+  "owner": "0xA3147ab5ce6BDf5FC6D3F2D817282f3D74fC15cb",
+  "reporter": "0x3bDfb5B4D463a07B5049D6594Ff703f3aB4eF8DB",
+  "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531",
+  "threshold": 6500,
+  "highValueThreshold": 5000,
+  "highValueWei": "1000000000000000",
+  "contracts": {
+    "SentinelReactive": {
+      "address": "0x0bFA2E632818E2d152b8135fAb683DDC10922954",
+      "txHash": "0xe26ce93f1f5d16a97f9009e4949fb41c837091736aff6ed6929d843e3d408e3d",
+      "blockNumber": 8509198,
+      "network": "lasna"
+    },
+    "EscrowVault": {
+      "address": "0x07129A520b7B4703F948b0c874D858389B2F27B1",
+      "txHash": "0xb96d172da7827c39079a6675de2d45058b2d27f72c071f89fa3cd67998a92988",
+      "blockNumber": 12149071,
+      "network": "ethereum-sepolia"
+    },
+    "AssessmentGateway": {
+      "address": "0xbFFdFb18931111C1dafce8A8323568cf7874b611",
+      "txHash": "0xd6362da6ce4a6de6387b2a03f73e5a155bd9dd5ee64fc07f56bd779b477e8557",
+      "blockNumber": 12149073,
+      "network": "ethereum-sepolia"
+    }
+  },
+  "createdAt": "2026-11-16T18:22:51.352Z",
+  "ready": true
+}

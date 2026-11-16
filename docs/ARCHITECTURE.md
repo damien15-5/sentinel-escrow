@@ -2,7 +2,7 @@
 
 ## Deployment topology
 
-Base Sepolia hosts `EscrowVault` and `AssessmentGateway`; Lasna hosts `SentinelReactive`. The worker is an ordinary long-running Node process using a dedicated Base Sepolia signer. It can run on a laptop or a persistent server. The included dashboard is a **local laboratory**, not a connected testnet wallet UI.
+The origin chain (Ethereum Sepolia in the live deployment; Base Sepolia also supported) hosts `EscrowVault` and `AssessmentGateway`; Lasna hosts `SentinelReactive`. The worker is an ordinary long-running Node process using a dedicated Base Sepolia signer. It can run on a laptop or a persistent server. The included dashboard is a **local laboratory**, not a connected testnet wallet UI.
 
 1. Deploy Reactive with chain ID, threshold and pinned model hash.
 2. Deploy the vault, then gateway with proxy, Reactive address, reporter, vault and model hash.
