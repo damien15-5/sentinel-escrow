@@ -1,0 +1,80 @@
+{
+  "mode": "testnet",
+  "scenario": "safe",
+  "amountEth": ".0001",
+  "escrowId": "1",
+  "origin": {
+    "chainId": 11155111,
+    "explorer": "https://sepolia.etherscan.io/tx/0x8e251077c4898b05316d1e1ecc32df3f3297c8c379c4b0a2719c2c1a5def2b4d"
+  },
+  "stages": {
+    "origin": {
+      "tx": "0x8e251077c4898b05316d1e1ecc32df3f3297c8c379c4b0a2719c2c1a5def2b4d",
+      "ms": 4311
+    },
+    "reactive-request": {
+      "tx": "0xd85b6f02ff634198243a4d47065d9f49e85dde91a246c5f2fd35dd8782301d33",
+      "secondsSincePrevious": 1.003,
+      "secondsSinceOpenConfirmed": 1.003,
+      "explorer": "https://lasna.reactscan.net/tx/0xd85b6f02ff634198243a4d47065d9f49e85dde91a246c5f2fd35dd8782301d33",
+      "args": {
+        "id": "1",
+        "originTxHash": "0x8e251077c4898b05316d1e1ecc32df3f3297c8c379c4b0a2719c2c1a5def2b4d",
+        "contentHash": "0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143"
+      }
+    },
+    "request-callback": {
+      "tx": "0xdd1fa21bc3bac1cd64286400d28051b3f3501dc467379ff8103543646c8be130",
+      "secondsSincePrevious": 11.595,
+      "secondsSinceOpenConfirmed": 12.598,
+      "explorer": "https://sepolia.etherscan.io/tx/0xdd1fa21bc3bac1cd64286400d28051b3f3501dc467379ff8103543646c8be130",
+      "args": {
+        "id": "1",
+        "contentHash": "0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143",
+        "deadline": "1794857064"
+      }
+    },
+    "ai-report": {
+      "tx": "0xcbf4f5cf5b01ab6cf5d051ebf0a038df1a814002614b5dfb7de26b5dc63c0158",
+      "secondsSincePrevious": 35.696,
+      "secondsSinceOpenConfirmed": 48.294,
+      "explorer": "https://sepolia.etherscan.io/tx/0xcbf4f5cf5b01ab6cf5d051ebf0a038df1a814002614b5dfb7de26b5dc63c0158",
+      "args": {
+        "id": "1",
+        "contentHash": "0x8876669b92e6a5318e44a5dea80f906ddb5586ce784125e6cc4733d5513a3143",
+        "score": "0",
+        "reportHash": "0x3edd89cc95494236444ce133837374200df5c39463518aa76ce29077fa767824",
+        "modelHash": "0x768da47313adbb5756f103a09c25027aa775fd0e71ff2cf6142f1b2cc4c8c531"
+      }
+    },
+    "reactive-decision": {
+      "tx": "0xe4185379671904c63caed1bc447cbbb11750bf6f8f8cbcd62185cd4d34446c19",
+      "secondsSincePrevious": 1.147,
+      "secondsSinceOpenConfirmed": 49.441,
+      "explorer": "https://lasna.reactscan.net/tx/0xe4185379671904c63caed1bc447cbbb11750bf6f8f8cbcd62185cd4d34446c19",
+      "args": {
+        "id": "1",
+        "reportTxHash": "0xcbf4f5cf5b01ab6cf5d051ebf0a038df1a814002614b5dfb7de26b5dc63c0158",
+        "score": "0",
+        "frozen": false,
+        "reportHash": "0x3edd89cc95494236444ce133837374200df5c39463518aa76ce29077fa767824",
+        "thresholdApplied": "6500"
+      }
+    },
+    "decision-callback": {
+      "tx": "0xb793eb505564f688e9919dedfffd30cc51a28a092d5a2f071426e2eee3a91b3c",
+      "secondsSincePrevious": 23.352,
+      "secondsSinceOpenConfirmed": 72.793,
+      "explorer": "https://sepolia.etherscan.io/tx/0xb793eb505564f688e9919dedfffd30cc51a28a092d5a2f071426e2eee3a91b3c",
+      "args": {
+        "id": "1",
+        "score": "0",
+        "frozen": false,
+        "reportHash": "0x3edd89cc95494236444ce133837374200df5c39463518aa76ce29077fa767824"
+      }
+    }
+  },
+  "totalSecondsOpenConfirmedToDecisionSeen": 72.793,
+  "measuredAt": "2026-11-16T18:25:37.745Z",
+  "method": "wall clock, 1 s RPC polling"
+}

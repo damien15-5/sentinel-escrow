@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {keccak256,toUtf8Bytes} from 'ethers';
 import {required,envInt,manifest,atomic} from './config.mjs';
-import {contract,rpc,signer} from './chain.mjs';
+import {contract,rpc,signer,originRpcUrl,originOf} from './chain.mjs';
 import {assess,MODEL_HASH} from './risk.mjs';
 export async function queryChunks(instance,filter,from,to,chunk=1000){const results=[];for(let start=from;start<=to;start+=chunk)results.push(...await instance.queryFilter(filter,start,Math.min(start+chunk-1,to)));return results;}
 export async function processJob({gateway,vault,provider,jobLog,originStart,chainId,reportsDir='.state/reports'}){
@@ -33,9 +33,9 @@ export async function processJob({gateway,vault,provider,jobLog,originStart,chai
   return {id:String(id),status:'reported',score:report.score,reportHash:report.reportHash,txHash:receipt.hash};
 }
 export async function runWorker(){
-  const state=manifest(), provider=rpc(required('BASE_RPC_URL'));
+  const state=manifest(), provider=rpc(originRpcUrl());
   try{
-    if((await provider.getNetwork()).chainId!==84532n)throw new Error('Worker only supports Base Sepolia');
+    const origin=await originOf(provider,state.originChainId);
     const reporter=signer(required('REPORTER_PRIVATE_KEY'),provider);
     const gateway=contract('AssessmentGateway',state.contracts.AssessmentGateway.address,reporter);
     const vault=contract('EscrowVault',state.contracts.EscrowVault.address,provider);
@@ -53,7 +53,7 @@ export async function runWorker(){
         const to=Math.min(safeHead,checkpoint.nextBlock+999);
         if(to>=checkpoint.nextBlock){
           const jobs=await gateway.queryFilter(gateway.filters.AssessmentRequested(),checkpoint.nextBlock,to);
-          for(const jobLog of jobs)console.log(JSON.stringify(await processJob({gateway,vault,provider,jobLog,originStart:state.contracts.EscrowVault.blockNumber,chainId:84532})));
+          for(const jobLog of jobs)console.log(JSON.stringify(await processJob({gateway,vault,provider,jobLog,originStart:state.contracts.EscrowVault.blockNumber,chainId:origin.chainId})));
           const block=await provider.getBlock(to);checkpoint={nextBlock:to+1,blockHash:block.hash};atomic(checkpointFile,checkpoint);
         }
       }catch(error){reporter.reset();console.error(`Worker retry: ${error.shortMessage||error.message}`);}
